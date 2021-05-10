@@ -23,9 +23,14 @@ services:
       MYSQL_DATABASE: db
       MYSQL_USER: db_user
       MYSQL_PASSWORD: Password123@
+      MYSQL_ROOT_PASSWORD: Password123@
 
   redis:
     image: redis:6.2.3
 
   web:
     image: traefik:v2.2
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"

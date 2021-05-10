@@ -11,17 +11,17 @@
 # LABEL  ->  allows you to add a label to your docker image.
 # CMD  ->  can be used for executing a specific command within the container.
 
-FROM ruby:3.0.1
+FROM ruby:3.0.0
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs && gem install bundler
 
-ENV APP /api_rate_limiter
+ENV APP /rate_limiter
 
 RUN mkdir $APP
 WORKDIR $APP
 
-COPY Gemfile /api_rate_limiter/Gemfile
-COPY Gemfile.lock /api_rate_limiter/Gemfile.lock
+COPY Gemfile /rate_limiter/Gemfile
+COPY Gemfile.lock /rate_limiter/Gemfile.lock
 
 RUN bundle install
 
