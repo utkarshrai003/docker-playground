@@ -8,6 +8,14 @@ services:
       - db
       - redis
 
+  #localhost:8083/student to test
+  #response : [{"studentId":19,"name":"Ansh","clas":"A"}]
+  student_management:
+    build: ./student_management
+    image: docker/playground:student_management
+    ports:
+      - "8083:8082" #host:container
+
   db:
     image: mysql:8.0
     restart: always
