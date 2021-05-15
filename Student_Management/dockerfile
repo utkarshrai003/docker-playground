@@ -1,0 +1,11 @@
+#Build stage
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY pom.xml /app/
+COPY src /app/src
+RUN mvn -f /app/pom.xml clean package
+
+#Deploymeny stage
+FROM openjdk:8-jdk-alpine
+COPY --from=build /app/target/*.jar /usr/local/webapps/student_management.jar
+EXPOSE 8082
+ENTRYPOINT ["java","-jar","/usr/local/webapps/student_management.jar"]
