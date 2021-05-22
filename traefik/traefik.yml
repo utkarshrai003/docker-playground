@@ -1,0 +1,11 @@
+providers:
+  file:
+    filename: /etc/traefik/traefik.config.yml
+    watch: true
+
+entryPoints:
+  http:
+    address: ':80'
+
+log:
+  level: DEBUG

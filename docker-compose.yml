@@ -37,5 +37,5 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik/traefik.static.yml:/etc/traefik/traefik.static.yml # static config
-      - ./traefik/traefik.dynamic.yml:/etc/traefik/traefik.dynamic.yml # dynamic config
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml # static config
+      - ./traefik/traefik.config.yml:/etc/traefik/traefik.config.yml # dynamic config

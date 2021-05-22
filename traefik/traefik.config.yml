@@ -1,0 +1,23 @@
+http:
+  routers:
+    # define a connection between the request and the service.
+    to-app:
+      rule: "PathPrefix(`/rails/`)"
+      service: app
+      priority: 1
+      entryPoints:
+        - http
+      middlewares:
+        - redirect
+
+  middlewares:
+    redirect:
+      redirectScheme:
+        scheme: http
+
+  # Add the service
+  services:
+    app:
+      loadBalancer:
+        servers:
+          - url: "http://app:3000/"

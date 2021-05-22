@@ -1,9 +1,0 @@
-http:
-  routers:
-    # define a connection between the request and the service.
-    to-app:
-      rule: "PathPrefix(`/rails/`)"
-      service: app
-      entrypoints: [ "http" ]
-      priority: 1
-      middlewares: ["redirect"]
