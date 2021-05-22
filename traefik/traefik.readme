@@ -1,0 +1,7 @@
+The main components of Traefik are -
+
+- Providers - discover the services that live on your infrastructure (their IP, health, ...)
+- Entrypoints - listen for incoming traffic (ports, ...)
+- Routers - analyse the requests (host, path, headers, SSL, ...)
+- Services - forward the request to your services (load balancing, ...)
+- Middlewares - may update the request or make decisions based on the request (authentication, rate limiting, headers, ...)

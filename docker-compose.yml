@@ -13,8 +13,6 @@ services:
   student_management:
     build: ./student_management
     image: docker/playground:student_management
-    ports:
-      - "8083:8082" #host:container
 
   db:
     image: mysql:8.0
@@ -34,3 +32,10 @@ services:
       - "80:80"
       - "443:443"
       - "8080:8080"
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --api.insecure=true --providers.docker
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.static.yml:/etc/traefik/traefik.static.yml # static config
+      - ./traefik/traefik.dynamic.yml:/etc/traefik/traefik.dynamic.yml # dynamic config
