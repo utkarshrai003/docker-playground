@@ -2,7 +2,7 @@ http:
   routers:
     # define a connection between the request and the service.
     to-app:
-      rule: Host(`google.com`)
+      rule: PathPrefix(`/rails`)
       service: app
       entryPoints:
         - http
@@ -10,17 +10,21 @@ http:
         - redirect
 
     to-java:
-      rule: Host(`drapp.test`)
+      rule: PathPrefix(`/java`)
       service: stm
       entryPoints:
         - http
       middlewares:
-        - redirect
+        - strip-java
 
   middlewares:
     redirect:
       redirectScheme:
         scheme: http
+    strip-java:
+      stripPrefix:
+        prefixes:
+          - /java
 
   # Add the service
   services:
