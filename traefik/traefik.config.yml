@@ -2,9 +2,16 @@ http:
   routers:
     # define a connection between the request and the service.
     to-app:
-      rule: "PathPrefix(`/rails/`)"
+      rule: Host(`google.com`)
       service: app
-      priority: 1
+      entryPoints:
+        - http
+      middlewares:
+        - redirect
+
+    to-java:
+      rule: Host(`drapp.test`)
+      service: stm
       entryPoints:
         - http
       middlewares:
@@ -21,3 +28,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://app:3000/"
+    stm:
+      loadBalancer:
+        servers:
+          - url: "http://student_management:8082/"
